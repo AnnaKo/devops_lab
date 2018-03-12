@@ -1,26 +1,26 @@
 #!/usr/bin/python
 
-E = str(input())
+E = str(input("Add Your Expression Here: "))
 L = ['+', '-', '*', '/']
 
 for I in range(len(L)):
     if E[1:].find(L[I]) >= 0:
         A = E[1:].index(L[I])+1
         break
-      
+
 try:
     Q = E.index('=')
     X, Y, Z = int(E[0:A]), int(E[A + 1:Q]), int(E[Q + 1:])
     if E[A] == '+' and X + Y == Z:
-      print('YES')
+        print('YES')
     elif E[A] == '-' and X - Y == Z:
-      print('YES')
+        print('YES')
     elif E[A] == '*' and X * Y == Z:
-      print('YES')
+        print('YES')
     elif E[A] == '/' and X / Y == Z:
-      print('YES')
+        print('YES')
     else:
-      print('NO')
+        print('NO')
 
 except Exception:
-  print ('ERROR')
+    print('ERROR')
