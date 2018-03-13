@@ -1,10 +1,12 @@
-#!/usr/bin/python
+# !/usr/bin/python
+"""python script"""
+# pylint: disable=invalid-name
 
+import argparse
+import getpass
 import requests
 # import json
-import argparse
 
-import getpass
 pwd = getpass.getpass(prompt="Enter Your Password: ")
 
 YOURNAME = input("Enter your github user name: ")
@@ -16,7 +18,8 @@ RURL = "https://api.github.com/repos/" + YOURNAME + "/" + YOURREPO + PULLS
 RURLB = "https://api.github.com/repos/" + YOURNAME + "/" + YOURREPO + BRANCHES
 RURLC = "https://api.github.com/repos/" + YOURNAME + "/" + YOURREPO + COMMITS
 
-# RGET = requests.get('https://api.github.com/repos/alenaPy/devops_lab/commits', auth=("AnnaKo", pwd))
+# RGET = requests.get('https://api.github.com/repos/alenaPy/devops_lab/commits',
+# auth=("AnnaKo", pwd))
 # RGET = requests.get('https://api.github.com/repos/alenaPy/devops_lab/pulls', auth=("AnnaKo", pwd))
 
 RGET = requests.get(RURL, auth=("AnnaKo", pwd))
