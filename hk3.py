@@ -8,7 +8,7 @@ from datetime import datetime
 from pathlib import Path
 import config
 
-TFILE = Path("/root/output.txt")
+TFILE = Path("output.txt")
 # JFILE = Path("/root/output.json")
 DATE = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
