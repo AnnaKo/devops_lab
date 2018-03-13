@@ -1,13 +1,15 @@
-#!/usr/bin/python
+# !/usr/bin/python
+"""python script"""
+# pylint: disable=invalid-name
 
 # sudo yum -y install python-nose python3-nose
 # pip install PyYAML
 
 import sys
 import os
-import pip
 import json
 import site
+import pip
 import yaml
 
 SV = sys.version
@@ -27,20 +29,30 @@ SPL = str(site.getsitepackages())
 # print("7 - Installed Packages Are: ", ('\n'.join(IPACK)))
 # print("8 - Site-Packages Location Is: ", SPL[2:len(SPL)-2:1])
 
-AKODICT = {'1 - Python Version is: ':SV[0:5:1], '3 - Python Virtual Environment Is: ':VE32, '4 - Python Executable Location Is: ':PEL, '5 - Pip Location Is: ':PIPL[2:len(PIPL)-2:1], '6 - PYTHONPATH Is: ':PYPATH, '7 - Installed Packages Are: ':(' '.join(IPACK)), '8 - Site-Packages Location Is: ':SPL[2:len(SPL)-2:1]}
+AKODICT = {'1 - Python Version is: ': SV[0:5:1],
+           '3 - Python Virtual Environment Is: ': VE32,
+           '4 - Python Executable Location Is: ': PEL,
+           '5 - Pip Location Is: ': PIPL[2:len(PIPL)-2:1],
+           '6 - PYTHONPATH Is: ': PYPATH, '7 - Installed Packages Are: ': (' '.join(IPACK)),
+           '8 - Site-Packages Location Is: ': SPL[2:len(SPL)-2:1]}
+
 
 def ako_json():
+    """json function"""
     with open('json.json', 'a') as ajson:
-        json.dump(AKODICT, ajson, indent = 4, ensure_ascii = False)
-    #ajson.write()
+        json.dump(AKODICT, ajson, indent=4, ensure_ascii=False)
+    # ajson.write()
     ajson.close()
     return 1
 
+
 def ako_yaml():
+    """yaml function"""
     with open('yml.yml', 'a') as ayml:
         yaml.dump(AKODICT, ayml, default_flow_style=False)
     ayml.close()
     return 1
+
 
 if __name__ == "__main__":
     # execute only if run as a script
