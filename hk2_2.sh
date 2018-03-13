@@ -1,4 +1,6 @@
-#!/usr/bin/python
+# !/usr/bin/python
+"""python script"""
+# pylint: disable=invalid-name
 
 print('Type Your Numbers - First List:')
 A = input().split()
