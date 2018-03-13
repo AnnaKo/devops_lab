@@ -1,19 +1,17 @@
-#!/usr/bin/python
+# !/usr/bin/python
+"""python script"""
+# pylint: disable=invalid-name
 
-import psutil
-# import re
-import time
-# import json
 from datetime import datetime
-from pathlib import Path
+# from pathlib import Path
+import json
+import time
+import psutil
 import config
-
-TFILE = Path("output.txt")
-# JFILE = Path("/root/output.json")
-DATE = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 
 def METRICS():
+    """metrics function"""
     CPU = psutil.cpu_percent()
     OMEM = psutil.swap_memory()
     VMEM = psutil.virtual_memory()
@@ -24,43 +22,43 @@ def METRICS():
 
 
 class akoclass():
+    """class akoclass"""
+
+    N = 1
 
     def tojson(self):
-        # N = 1
-        # while True:
-        COUNTER = "SNAPSHOT"  # + str(N) + ":"
-        DICT = {'Snapshot': COUNTER, 'Data': DATE, 'OMEM': psutil.swap_memory()}
-        import json
+        """class function"""
+        COUNTER = str(self.N) + ":"
+        DICT = {'Snapshot': COUNTER, 'Data': DATE, 'METRICS': METRICS()}
         with open('output.json', 'a') as akojson:
-            json.dump(DICT, akojson)
-        # N += 1
-        time.sleep(config.interval)
-        # akojson.close
+            json.dump(DICT, akojson, indent=4)
+        self.N += 1
 
     def totxt(self):
-        N = 1
-        if TFILE.exists():
-            COUNTER = "SNAPSHOT" + str(N)
-            PARAMS = str(COUNTER) + ":" + DATE + ":" + METRICS()
-            file = open("output.txt", "a")
-            file.write(PARAMS)
-            file.close()
-            N += 1
-            time.sleep(config.interval)
-        else:
-            COUNTER = "SNAPSHOT" + str(N)
-            file = open("output.txt", "w")
-            PARAMS = str(COUNTER) + ":" + DATE + ":" + METRICS()
-            file.write(PARAMS)
-            file.close()
-            N += 1
-            time.sleep(config.interval)
+        """save to text file"""
+        COUNTER = "SNAPSHOT" + str(self.N)
+        PARAMS = str(COUNTER) + ":" + DATE + ":" + METRICS() + "\n\n"
+        file = open("output.txt", "a")
+        file.write(PARAMS)
+        file.close()
+        self.N += 1
 
 
 cl = akoclass()
-
+"""ako class"""
 
 if config.output == "txt":
-    cl.totxt()
+    file = open("output.txt", "w")
+    file.close()
 else:
-    cl.tojson()
+    file = open("output.json", "w")
+    file.close()
+
+while True:
+    print(config.interval)
+    DATE = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    if config.output == "txt":
+        cl.totxt()
+    else:
+        cl.tojson()
+    time.sleep(config.interval*60)
